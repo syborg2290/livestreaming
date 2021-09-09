@@ -1,4 +1,6 @@
 {% load static %}
+{% load components %}
+
 <!DOCTYPE html>
 <html>
 
@@ -7,13 +9,24 @@
     <title>{% block title %}Keptoon{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{% static "css/style.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/main.css" %}">
 </head>
-
-<body>
+<!-- #54E346 -->
+<body style="background-color: #1F1D2B">
     <header>
-       
+        <div>
+            {%component 'navbar.html' %}
+        </div>
     </header>
-    <div>{% block content %} {% endblock %}</div>
+    <div class="grid grid-cols-6 gap-1">
+        
+        <div>{% component "sidebar.html" ctxp=request %}</div>
+        <div class="col-span-5">
+            {% block content %}
+          
+            {% endblock content %}
+        </div>
+      </div>
 </body>
 
 </html>

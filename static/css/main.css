@@ -1,0 +1,21 @@
+.nav-search-input {
+  background-color: #363441;
+}
+
+.nav-search-input::placeholder {
+  font-size: 17px;
+  color: white;
+}
+
+.nav_search_input_icon {
+  font-size: 17px;
+  color: white;
+}
+
+.hide-scroll-bar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.hide-scroll-bar::-webkit-scrollbar {
+  display: none;
+}
