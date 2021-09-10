@@ -1,5 +1,6 @@
 {% load static %}
 {% load heroicons %}
+{% load components %}
 
 <nav  id="nav_id" class="flex fixed rounded-sm top-0 bg-[#1F1D2B] items-center 
       justify-between mx-auto px-8 w-screen h-16 z-10">
@@ -23,6 +24,33 @@
   </button>
 </div>
 <!-- end search bar -->
+
+
+<div class="flex justify-between items-center pt-2">
+  <div
+    id="signin"
+    class="text-gray-300 text-base leading-none font-semibold hover:text-white mr-4 cursor-pointer"
+  >
+    Sign in
+  </div>
+
+  <div id="modal_window_signin" class="fixed hidden z-10 inset-0 overflow-y-auto">
+    {%component 'sub_components/signin_modal.html'%} 
+  </div>
+
+  <div
+    id="signup"
+    class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white 
+    hover:border-transparent hover:text-black hover:bg-white mt-4 lg:mt-0 cursor-pointer"
+  >
+    Sign up
+  </div>
+
+  <div id="modal_window_signup" class="fixed hidden z-10 inset-0 overflow-y-auto">
+    {%component 'sub_components/signup_modal.html'%} 
+  </div>
+
+</div>
 
 <div>
   <!-- <img src="media/icons/notifications.png" alt="bell" width="35" height="35"/> -->
@@ -48,4 +76,14 @@
       searchbar.classList.remove('rounded-xl');
     }
 };
+
+document.getElementById("signin").addEventListener("click", function(){
+  document.getElementById("modal_window_signin").classList.remove("hidden");
+});
+
+document.getElementById("signup").addEventListener("click", function(){
+  document.getElementById("modal_window_signup").classList.remove("hidden");
+});
+
+   
 </script>
