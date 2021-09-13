@@ -25,7 +25,7 @@
 </div>
 <!-- end search bar -->
 
-
+{% if not ctxp.user.is_authenticated %}
 <div class="flex justify-between items-center pt-2">
   <div
     id="signin"
@@ -49,8 +49,15 @@
   <div id="modal_window_signup" class="fixed hidden z-10 inset-0 overflow-y-auto">
     {%component 'sub_components/signup_modal.html'%} 
   </div>
-
 </div>
+{% else %}
+<div
+id="logout"
+class="text-gray-300 text-base leading-none font-semibold hover:text-white mr-4 cursor-pointer"
+>
+<a href="">Logout</a>
+</div>
+{% endif %}
 
 <div>
   <!-- <img src="media/icons/notifications.png" alt="bell" width="35" height="35"/> -->

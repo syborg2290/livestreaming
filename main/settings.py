@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = 'user.User'
 
 # Application definition
 
@@ -41,7 +42,8 @@ INSTALLED_APPS = [
     'django_uicomponents',
     "heroicons",
 
-    'home'
+    'home',
+    'user'
 ]
 
 MIDDLEWARE = [
@@ -141,3 +143,6 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Email setting
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
