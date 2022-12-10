@@ -1,0 +1,35 @@
+body::-webkit-scrollbar {
+  width: 6px;
+}
+
+body::-webkit-scrollbar-track {
+  background: rgb(36, 27, 11);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #363441;
+  border-radius: 20px;
+  border: 3px solid #3f3c52;
+}
+
+.nav-search-input {
+  background-color: #363441;
+}
+
+.nav-search-input::placeholder {
+  font-size: 17px;
+  color: white;
+}
+
+.nav_search_input_icon {
+  font-size: 17px;
+  color: white;
+}
+
+.hide-scroll-bar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.hide-scroll-bar::-webkit-scrollbar {
+  display: none;
+}

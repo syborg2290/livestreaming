@@ -1,0 +1,47 @@
+{% load static %}
+{% load heroicons %}
+
+
+<nav class="mt-5 ml-5 h-screen fixed top-20 z-50">
+  
+  {% url 'home:home' as homeUrl %}
+  <a class="flex items-center justify-center xl:justify-start
+  text-lg text-white {% if ctxp.path in '' %} opacity-100 {% else %} opacity-60 hover:opacity-100 {% endif %}
+  mb-5 transition duration-350 ease-in-out cursor-pointer"
+  href="{{homeUrl}}"
+>
+  {% heroicon_outline 'home' size=40 class="h-6 w-6 inline text-red-500" %}
+  <span class="hidden xl:block ml-4 font-bold">Discover</span>
+</a>
+
+{% url 'home:home' as homeUrl %}
+<a class="flex items-center justify-center xl:justify-start
+  text-lg text-white {% if ctxp.path in '/home/' %} opacity-100 {% else %} opacity-60 hover:opacity-100 {% endif %}
+  mb-5 transition duration-350 ease-in-out cursor-pointer"
+  href="{{homeUrl}}"
+>
+  {% heroicon_outline 'trending-up' size=40 class="h-6 w-6 inline text-red-500" %}
+  <span class="hidden xl:block ml-4 font-bold">Trending</span>
+</a>
+
+{% url 'home:home' as homeUrl %}
+<a class="flex items-center justify-center xl:justify-start
+  text-lg text-white {% if ctxp.path in '/home/' %} opacity-100 {% else %} opacity-60 hover:opacity-100 {% endif %}
+  mb-5 transition duration-350 ease-in-out cursor-pointer"
+  href="{{homeUrl}}"
+>
+  {% heroicon_outline 'collection' size=40 class="h-6 w-6 inline text-red-500" %}
+  <span class="hidden xl:block ml-4 font-bold">Categories</span>
+</a>
+
+{% url 'home:rooms' as roomsUrl %}
+<a class="flex items-center justify-center xl:justify-start
+  text-lg text-white {% if ctxp.path in '/rooms/' %} opacity-100 {% else %} opacity-60 hover:opacity-100 {% endif %}
+  mb-5 transition duration-350 ease-in-out cursor-pointer"
+  href="{{roomsUrl}}"
+>
+  {% heroicon_outline 'user-group' size=40 class="h-6 w-6 inline text-red-500" %}
+  <span class="hidden xl:block ml-4 font-bold">Virtual rooms</span>
+</a>
+
+</nav>

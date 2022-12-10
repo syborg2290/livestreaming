@@ -1,0 +1,162 @@
+{% load static %}
+{% load heroicons %}
+
+<div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+   
+    <div class="fixed inset-0 bg-gray-600 bg-opacity-80 transition-opacity" aria-hidden="true"></div>
+
+    <!-- This element is to trick the browser into centering the modal contents. -->
+    <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+    <div class="inline-block align-bottom bg-black rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+      <div class="bg-black px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+        
+        <div class="flex justify-between">
+          <di></di>
+          <div id="close_button_signup" class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 
+                rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10 cursor-pointer">
+            {% heroicon_outline "x" size=40 class="h-6 w-6 inline text-red-500" %}
+          </div>
+        </div>
+         
+          <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+
+            <form>
+             
+              <div>
+                <span class="text-sm text-white">Hey there</span>
+                <h1 class="text-2xl font-bold text-white">Create your account</h1>
+              </div>
+              <div class="my-3">
+                <div id="erroremail" class="text-red-800"></div>
+                <label class="block text-md mb-2 text-white" for="email">Email</label>
+                <input id="exampleInputEmail" class="px-4 w-full border-2 py-2 rounded-md text-sm outline-none" type="email" name="email" placeholder="email">
+              </div>
+              <div class="my-3">
+                <div id="errorusername" class="text-red-800"></div>
+                <label class="block text-md mb-2 text-white" for="display_name">Username</label>
+                <input id="exampleInputUsername" class="px-4 w-full border-2 py-2 rounded-md text-sm outline-none" type="text" name="username" placeholder="username">
+              </div>
+              <div class="mt-5">
+                <div id="errorpassword1" class="text-red-800"></div>
+                <label class="block text-md mb-2 text-white" for="password">Password</label>
+                <input id="exampleInputPassword1" class="px-4 w-full border-2 py-2 rounded-md text-sm outline-none" type="password" name="password" placeholder="password">
+                </div>
+                <div class="mt-5">
+                  <div id="errorpassword2" class="text-red-800"></div>
+                  <label class="block text-md mb-2 text-white" for="password">Confirm Password</label>
+                  <input id="exampleInputPassword2" class="px-4 w-full border-2 py-2 rounded-md text-sm outline-none" type="password" name="password" placeholder="password">
+                  </div>
+                  <div class="flex justify-between">
+                    <div>
+                      <input type="checkbox" name="tcCheckName" id="tcCheck" checked class="inline-block align-middle" />
+                      <span class="text-sm text-white">I'm accepting the t&c</span>
+                    </div>
+                    <span class="text-sm text-red-500 hover:underline cursor-pointer">Terms and Conditions?</span>
+                  </div>
+                  <div id="errortc" class="text-red-800"></div>
+                  <div class="">
+                    <button id="submit_button_signup" class="mt-4 mb-3 w-full bg-red-500 hover:bg-red-400 text-white py-2 rounded-md transition duration-100"
+                    >
+                    Create now
+                  </button>
+                    <div class="flex  space-x-2 justify-center items-end bg-gray-700 hover:bg-gray-600 text-white py-2 rounded-md transition duration-100"">
+                    <img class=" h-5 cursor-pointer" src="https://i.imgur.com/arC60SB.png" alt="">
+                      <button >Or sign-up with google</button>
+                    </div>
+                  </div>
+                  {% csrf_token %}
+            </form>
+
+          </div>
+        </div>
+      
+    </div>
+    <div id="DivContent2" class="hidden"></div>
+  </div>
+
+
+  <script>
+
+      $("#DivContent2").load("../navbar.html"); 
+      document.getElementById("close_button_signup").addEventListener("click",function(){
+      document.getElementById("modal_window_signup").classList.add("hidden");
+    });
+
+    // $("#tcCheck").on("click", function () {
+    //     console.log(document.getElementById("tcCheck").checked)           
+    // });
+
+    document.getElementById("submit_button_signup").addEventListener("click",function(event){
+      event.preventDefault();
+      signup();
+    });
+
+    function signup(){
+            email = document.getElementById("exampleInputEmail").value;
+            username = document.getElementById("exampleInputUsername").value;
+            password1 = document.getElementById("exampleInputPassword1").value;
+            password2 = document.getElementById("exampleInputPassword2").value;
+            tcChecked = document.getElementById("tcCheck").checked;
+            csrfmiddlewaretoken = document.getElementsByName("csrfmiddlewaretoken")[0].value;
+           
+            if(tcChecked){
+                      $("#erroremail").html("");
+                      $("#errorusername").html("");
+                      $("#errorpassword1").html("");
+                      $("#errorpassword2").html("");
+                      $("#errortc").html("");
+                      if(email == ""){
+                          $("#erroremail").html("You must provide an email!");
+                      }
+                      else{
+                        if(username == ""){
+                          $("#errorusername").html("You must provide a username!");
+                        }else{
+                          if(password1 == "" || password2==""){
+                            $("#errorpassword1").html("Password can not be empty!");
+                            $("#errorpassword2").html("Confirm password can not be empty!");
+                          }else{
+                            if(password1==password2){
+                              $("#errorpassword1").html("");
+                              $("#errorpassword2").html("");
+                              $.ajax({
+                              type:"POST",
+                              url:'/signup/',
+                              data:{
+                                'csrfmiddlewaretoken': csrfmiddlewaretoken,
+                                'username':username,
+                                'email':email,
+                                'password1':password1,
+                                'password2':password2,
+                              },
+                             
+                              success : function(data){
+                                  console.log(data['message']);
+                                  if(data['message'] == "Success"){
+                                      window.location.reload();
+                                  }else{
+                                      if("email" in data['message'])
+                                          $("#erroremail").html(data['message']['email'][0]);
+                                      if("username" in data['message'])
+                                          $("#errorusername").html(data['message']['username'][0]);
+                                      if("password2" in data['message'])
+                                          $("#errorpassword2").html(data['message']['password2'][0]);
+                                          $("#errorpassword1").html(data['message']['password2'][0]);
+                                  }
+                              }
+                          })
+                    }else{
+                      $("#errorpassword1").html("Both passwords must be match!");
+                      $("#errorpassword2").html("Both passwords must be match!");
+                    }
+                      }  
+                }
+              }
+            }else{
+              $("#errortc").html("You must agree with our terms and conditions!");
+            }
+       
+      }
+
+  </script>

@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = 'user.User'
 
 # Application definition
 
@@ -39,8 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'django_uicomponents',
+    "heroicons",
 
-    'home'
+    'home',
+    'user'
 ]
 
 MIDDLEWARE = [
@@ -66,6 +69,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'home.context_processors.currentPanel',
             ],
         },
     },
@@ -79,8 +83,12 @@ WSGI_APPLICATION = 'main.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'keptoon',
+        'USER': 'postgres',
+        'PASSWORD': 'syborg2290',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -123,10 +131,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR/'static_root'
-MEDIA_ROOT=BASE_DIR/'media'
-MEDIA_URL='/media/'
+MEDIA_ROOT = BASE_DIR/'media'
+MEDIA_URL = '/media/'
 
-STATICFILES_DIRS=[
+STATICFILES_DIRS = [
     BASE_DIR/'static'
 ]
 
@@ -135,3 +143,6 @@ STATICFILES_DIRS=[
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Email setting
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
