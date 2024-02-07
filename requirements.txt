@@ -4,7 +4,7 @@ cffi==1.14.6
 charset-normalizer==2.0.4
 cryptography==3.4.8
 defusedxml==0.7.1
-Django==3.2.7
+Django==3.2.24
 django-allauth==0.45.0
 django-uicomponents==0.1.0
 heroicons==1.1.0
